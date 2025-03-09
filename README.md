@@ -12,3 +12,7 @@ $scp [オプション] コピー元のパス 保存先のパス
 https://qiita.com/katsukii/items/225cd3de6d3d06a9abcb  
 https://qiita.com/sayama0402/items/c5c2795968ced798150a  
 https://qiita.com/nakaji0210/items/abb654015278a1896133
+
+## 実行環境
+(py36) yuabe@g14:/mnt/kiso-qnap/abe/m1/voice_actor_recognition$  
+で動かしている．
