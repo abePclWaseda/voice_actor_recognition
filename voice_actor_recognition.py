@@ -10,7 +10,7 @@ base_path = '/mnt/kiso-qnap/abe/m1/voice_actor_recognition/data/'
 
 # 1フレームを切り出す
 data, fs = sf.read(base_path + 'jvs001_VOICEACTRESS100_001.wav')
-print(f'sampling rate:{fs}')
+# print(f'sampling rate:{fs}')
 
 time = np.arange(0, len(data)/fs, 1/fs)
 
@@ -53,3 +53,26 @@ for c in np.arange(0, n_channel):
 plt.title('Mel Filter Bank')
 plt.xlabel('Frequency[Hz]')
 # plt.savefig("./data/mel_filter_bank.png")
+
+# 振幅スペクトルにメルフィルタバンクを適用
+mspectre = np.dot(spectre, filterbank.T)
+
+# 元の振幅スペクトルとフィルタバンクをかけて圧縮したスペクトルを表示
+plt.figure(figsize=(13, 5))
+
+plt.plot(fscale, 10 * np.log10(spectre), label='Original Spectrum')
+plt.plot(fcenters, 10 * np.log10(mspectre), "o-", label='Mel Spectrum')
+plt.xlabel("frequency[Hz]")
+plt.ylabel('Amplitude[dB]')
+plt.legend()
+# plt.savefig("./data/spectrum.png")
+
+from scipy.fftpack.realtransforms import dct
+
+cepstre = dct(10 * np.log10(mspectre), type=2, norm="ortho", axis=-1)
+print(cepstre.shape) # (20,)
+print(cepstre) 
+#  [13.3190939 24.2771886  6.9022144 -3.5544651 12.9122567  0.5574299
+#  -1.8089861  1.496971  -6.083573   0.5448475 -2.8065642 -0.0265315
+#   0.8130684  0.1490588 -0.9149896 -1.70858    2.6811971 -0.3079438
+#   1.3090417 -1.841087 ]
