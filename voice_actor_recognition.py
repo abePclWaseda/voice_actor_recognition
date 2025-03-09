@@ -51,4 +51,4 @@ for c in np.arange(0, n_channel):
 
 plt.title('Mel Filter Bank')
 plt.xlabel('Frequency[Hz]')
-plt.show()
+# plt.savefig("./data/mel_filter_bank.png")
