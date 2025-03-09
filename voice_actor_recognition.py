@@ -39,4 +39,16 @@ plt.plot(fscale, spectre)
 plt.xlabel("frequency [Hz]")
 plt.ylabel("amplitude spectrum")
 # plt.savefig("./data/hamming.png")
-     
+
+n_channel = 20 # メルフィルタバンクのチャネル数
+df = fs / N    # 周波数解像度(周波数インデックス1あたりの[Hz]幅)
+from mel_filter_bank import mel_filter_bank
+filterbank, fcenters = mel_filter_bank(fs, N, n_channel)
+
+# メルフィルタバンクのプロット
+for c in np.arange(0, n_channel):
+    plt.plot(np.arange(0, N // 2) * df, filterbank[c])
+
+plt.title('Mel Filter Bank')
+plt.xlabel('Frequency[Hz]')
+plt.show()
